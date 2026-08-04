@@ -47,7 +47,7 @@ Actualmente:
 
 
 - HTML5
-
+- JavaScript
 
 
 Próximamente:
@@ -69,10 +69,8 @@ Próximamente:
 
 
 ## Estado del proyecto
-
-
-
-🚧 En desarrollo.
+- Versión:
+Clase 02
 
 
 
