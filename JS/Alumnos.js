@@ -1,71 +1,178 @@
-const alumnos=[
-    {id: 1,
-        nombre: "Ana"
+const alumnos = [
+    {
+        id: 1,
+        nombre: "Luz",
+        
     },
     {
         id: 2,
-        nombre: "Natalia"
+        nombre: "Luis"
+    },
+    {
+        id: 3,
+        nombre: "Rocio"
     }
 ];
-function obtenerAlumnos() {
-    return new Promise((resolve) =>{
+
+function obtenerAlumno() {
+    return new Promise ((resolve) => {
         setTimeout(() => {
-         resolve (alumnos)   
-        },2000);
-        
+            resolve(alumnos)
+        }, 2000)
     })
 }
-async function iniciar() {
-    const datos = await obtenerAlumnos()
-console.table(datos)
-}
+
+
+
 iniciar()
+
 //crear obtenerMaterias()
-//crear obtenerDocentes()
-//mostrar los datos a traves de async/await
+const materias = [
+    {
+        id: 1,
+        materia: "Ingles",
+        
+    },
+    {
+        id: 2,
+        materia: "Lengua"
+    },
+    {
+        id: 3,
+        nombre: "Historia"
+    }
+];
 
-function obtenerMaterias(){
-    return new Promise((resolve)=>{
-        setTimeout(()=> {
-        resolve (materias)
-    }, 3000);
+
+function obtenerMaterias() {
+    return new Promise ((resolve) => {
+        setTimeout(() => {
+            resolve(materias)
+        }, 2000)
     })
 }
-async function iniciar() {
-    const datos = await obtenerMaterias()
-    console.table(datos)
+
+async function mostrarMaterias() {
+const materia = await obtenerMaterias()
+console.table(materia)    
 }
-iniciar()
-function obtenerDocentes(){
-    return new Promise((resolve)=>{
-     setTimeout(() => {
-        resolve (docente)
-    }, 3000);
-})
-}
-async function iniciar() {
-    const datos= await obtenerDocentes()
-    console.table(datos)
-    
-}
-iniciar()
 
 
-//ejemplo:06/08/26
-async function  prueba() {
-const respuesta = await fetch("https://jsonplaceholder.typicode.com/users")
-console.log(respuesta)
+//crear obtenerDocentes()
+const docentes = [
+    {
+        id: 1,
+        nombre: "Rosa",
+        materia: "Ingles",
+        
+    },
+    {
+        id: 2,
+        nombre: "Juan",
+        materia: "Lengua"
+    },
+    {
+        id: 3,
+        nombre: "Mia",
+        nombre: "Historia"
+    }
+];
+
+function obtenerDocentes() {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve(docentes)
+        }, 2000)
+    })
 }
-prueba()
-//10/08/26
-function mostrarAlumnos(alumnos){ 
-    console.log(typeof alumnos)
-    localStorage.setItem("alumnos", JSON.stringify (alumnos))
-    const datosa = localStorage.getItem("alumnos")
-    console.log(typeof datos)
-    console.log (datos)
-    const alumnosRecuperados = JSON.parse(datos)
-    console.log(typeof alumnosRecuperados)
-    console.table(alumnos)
+
+async function mostrarDocentes() {
+const docente = await obtenerDocentes()
+console.table(docente)    
+}
+
+async function obtAlumnos() {
+    const respuesta = await fetch("https://jsonplaceholder.typicode.com/users") 
+    const alumnos = await respuesta.json()
+    return alumnos
+
+}
+
+function mostrarAlumnos(alumnos){
+ console.table(alumnos)
+
+console.log(typeof alumnos)
+localStorage.setItem("alumnos", JSON.stringify(alumnos))
+const datos = localStorage.getItem("alumnos") //Convertir de object a string
+
+const alumnosRecup = JSON.parse(datos) //Convertir de string a object
+console.log(typeof alumnosRecup)
+console.table(alumnosRecup)
+
+
+ console.log()
+ console.log(alumnos[0])//Opción 1: muestra de a un elemento
+
+ for (const alumno of alumnos)//Opción 2: muestra todos los elementos (Suele ser la más recomendada)
+ {
+    console.log(alumno.id, alumno.name, alumno.email)
+ }
+}
+
+async function iniciar() {
+const alumnos = await obtAlumno()
+console.table(alumnos)    
+}
+
+obtAlumnos()
+mostrarAlumnos() 
+iniciar()
+
+// /post
+// /comments
+// id, título, usuario
+
+async function obtenerPost(){
+    const respuesta = await fetch("https://jsonplaceholder.typicode.com/posts")
+    const posts = await respuesta.json()
+    return posts
+}
+
+function mostrarPost() {
+    for (const post of posts){
+        console.log(post.id, post.title, post.userId)
+    }
+}
+
+async function init() {
+const posts = await obtenerPost()
+console.table(posts)
     
 }
+
+obtenerPost()
+mostrarPost()
+init()
+
+async function obtenerComent(){
+    const respuesta = await fetch("https://jsonplaceholder.typicode.com/comments")
+    const comentarios = await respuesta.json()
+    return comentarios
+}
+
+function mostrarComent(){
+    for (const comentario of comentarios){
+        console.log(comentario.postId, comentario.name, comentario.email )
+    }
+}
+
+function inic(){
+    const comentarios = await obtenerComent()
+    console.table(comentarios)
+}
+
+obtenerComent()
+mostrarComent()
+init()
+
+// 10/08/2026
