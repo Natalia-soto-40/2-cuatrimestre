@@ -1,61 +1,10 @@
 // 11/08/2026 proyecto proyecto
-const formulario = document.querySelector("#formAlumno")
+const formulario = document.querySelector("#formulario")
 const mensaje = document.querySelector("#mensaje")
 let alumnoEditandoId = null;
+let alumnoEditar = null
 
-formulario.addEventListener("submit", function (event) {
-    event.preventDefault();
-
-
-    const nombre = document.querySelector("#nombre").value.trim()
-    const carrera = document.querySelector("#carerra").value.trim()
-    const correo = document.querySelector("#correo").value.trim()
-    if (nombre === "" || carrera === "" || correo === ""){
-       mostrarMensaje("Todos los campos son obligatorios!!!", "msj-error")
-       return //Vuelve al inicio para poder comenzar otra vez a llenar los campos 
-    }
-   if (!correo.includes("@")) {
-    mostrarMensaje("Ingrese un correo valido!!!", "msj-error")
-    return
-   }
-
-   if (nombre.legth < 3) {
-   mostrarMensaje("El nombre debe tenr al menos 3 caracteres!!!", "msj-error")
-   return
-   }
-
-    const alumnos = obtenerAlumnos()
-
-
-    if (alumno === null) {
-
-        const alumno = {
-            id: Date.now(),//Para generar un número unico internamente.
-            nombre: nombre,
-            carrera: carrera,
-            correo: correo
-        }
-
-
-        mostrarMensaje("Alumno guardado correctamente");
-        alumnos.push(alumno)
-    } else {
-        const alumno = alumnos.find(alumno => alumno.id === alumnoEditandoId)
-        alumno.nombre = nombre
-        alumno.carrera = carrera
-        alumno.correo = correo
-        alumnoEditandoId = null;
-        formulario.querySelector("button").textContent = "Guardar"
-
-        mostrarMensaje("Alumno actualizado correctamente", "msj-exito")
-    }
-
-    localStorage.setItem("alumnos", JSON.stringify(alumnos))
-
-    mostrarAlumnos(alumnos);
-
-    formulario.reset();
-});
+formulario.addEventListener();
 
 function mostrarMensaje(texto, clase) {
     mensaje.textContent = texto;
@@ -67,13 +16,8 @@ function mostrarMensaje(texto, clase) {
 }
 
 
-function obtenerAlumnos() {
-    const datos = localStorage.getItem("alumnos")
-    if (datos) {
-        return JSON.parse(datos)
-    }
-    return [] //Evita que me devuelva null.
-}
+function obtenerAlumnos() {}
+    return obtenerDatos("alumnos")
 
 const listaAlumnos = document.querySelector("#listaAlumno")
 
@@ -146,6 +90,10 @@ function editarAlumno(id) {
     Document.querySelector("#nombre").value = alumno.nombre;
     Document.querySelector("#carrera").value = alumno.carrera;
     Document.querySelector("#correo").value = alumno.correo;
+alumnoEditar =
+nombre = alumno.nombre,
+carrera = alumno,carrera,
+
     alumnoEditandoId = id;
     formulario.querySelector("button").textContent = "Actualizar alumno"
     document.querySelector("#nombre").focus()
