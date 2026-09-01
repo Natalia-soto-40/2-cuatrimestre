@@ -34,3 +34,5 @@ Content-Type: application/json
     "nombre": "Lucia",
     "carrera": "Programacion"
 }
+###
+DELETE http://localhost:3000/alumnos/2
